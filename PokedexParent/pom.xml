@@ -10,7 +10,7 @@
         <version>2.6.3</version>
     </parent>
 
-    <groupId>org.example</groupId>
+    <groupId>br.com.naback</groupId>
     <artifactId>PokedexParent</artifactId>
     <version>1.0.0</version>
 

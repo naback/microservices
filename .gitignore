@@ -1,4 +1,13 @@
-/.metadata/
 *.idea
-/.idea
 *.class
+*.cmd
+/.metadata/
+/.idea
+/PokedexParent/target/
+/PokedexBusinessService/target/
+/PokedexBusinessService/.mvn/
+/PokedexDataService/target/
+/PokedexDataService/.mvn/
+/PokedexAuditService/target/
+/PokedexAuditService/.mvn
+mvnw
