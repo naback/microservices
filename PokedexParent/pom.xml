@@ -13,6 +13,8 @@
     <groupId>org.pokedex</groupId>
     <artifactId>PokedexParent</artifactId>
     <version>1.0.0</version>
+    <name>PokedexParent</name>
+    <description>Parent service for Pokedex System</description>
 
     <properties>
         <maven.compiler.source>15</maven.compiler.source>
