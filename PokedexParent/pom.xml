@@ -18,9 +18,11 @@
     <packaging>pom</packaging>
 
     <properties>
+        <org.springframework.boot.version>2.6.3</org.springframework.boot.version>
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
         <springfox-swagger2.version>3.0.0</springfox-swagger2.version>
+        <com.h2database.version>2.1.210</com.h2database.version>
     </properties>
 
     <dependencies>
