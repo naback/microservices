@@ -9,17 +9,12 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "petstore.swagger.io"
-basePath: "/v2"
 tags:
   - name: "pokemon"
     description: "everything about your pokemons"
     externalDocs:
       description: "Find out more"
       url: "http://swagger.io"
-schemes:
-  - "https"
-  - "http"
 paths:
   /pokemon:
     post:
@@ -59,5 +54,30 @@ components:
     CreatePokemonRequest:
       type: object
       required:
-        -
+        - parametro1
+      properties:
+        parametro1:
+          $ref: '#/components/schemas/parametro1'
+
+    CreatePokemonResponse:
+      type: object
+      required:
+        - parametro1
+      properties:
+        parametro1:
+          $ref: '#/components/schemas/parametro1'
+
+    ErrorInfo:
+      type: object
+      required:
+        - parametro1
+      properties:
+        parametro1:
+          $ref: '#/components/schemas/parametro1'
+
+    parametro1:
+      type: string
+      description: primeiro parametro
+      example: 'xalala'
+
                 

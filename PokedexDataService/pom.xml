@@ -22,6 +22,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.openapitools</groupId>
+			<artifactId>jackson-databind-nullable</artifactId>
+			<version>${org.openapitools.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<version>${com.h2database.version}</version>
@@ -38,20 +44,27 @@
 			<plugin>
 				<groupId>org.openapitools</groupId>
 				<artifactId>openapi-generator-maven-plugin</artifactId>
-				<!-- RELEASE_VERSION -->
 				<version>${openapi.generator.plugin.version}</version>
-				<!-- /RELEASE_VERSION -->
 				<executions>
 					<execution>
 						<goals>
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<inputSpec>$src/main/openapi.yaml</inputSpec>
-							<generatorName>java</generatorName>
+							<inputSpec>src/main/openapi/openapi.yaml</inputSpec>
+							<generatorName>spring</generatorName>
+							<modelPackage>org.pokedex.dataservice.openapi</modelPackage>
+							<apiPackage>org.pokedex.dataservice.openapi</apiPackage>
+							<ignoreFileOverride>src/main/openapi/.openapi-generator-ignore</ignoreFileOverride>
 							<configOptions>
+								<artifactId>PokedexDataService</artifactId>
+								<groupId>org.pokedex.dataservice</groupId>
+								<basePackage>org.pokedex.dataservice.openapi</basePackage>
+								<configPackage>org.pokedex.dataservice.openapi</configPackage>
+								<interfaceOnly>true</interfaceOnly>
 								<sourceFolder>src/gen/java/main</sourceFolder>
 							</configOptions>
+							<additionalProperties>removeEnumValuePrefix=false</additionalProperties>
 						</configuration>
 					</execution>
 				</executions>
