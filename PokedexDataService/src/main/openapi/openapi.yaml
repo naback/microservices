@@ -1,4 +1,4 @@
-swagger: "2.0"
+openapi: "3.0.3"
 info:
   description: "This is a training exercise for a Pokedex server. For this sample, you can use the api key `special-key` to test the authorization filters."
   version: "1.0.0"
@@ -13,7 +13,7 @@ host: "petstore.swagger.io"
 basePath: "/v2"
 tags:
   - name: "pokemon"
-    description: "Everything about your Pokemons"
+    description: "everything about your pokemons"
     externalDocs:
       description: "Find out more"
       url: "http://swagger.io"
@@ -25,305 +25,39 @@ paths:
     post:
       tags:
         - "pokemon"
-      summary: "Add a new pokemon to the pokedex"
-      description: ""
-      operationId: "addPet"
-      consumes:
-        - "application/json"
-        - "application/xml"
-      produces:
-        - "application/xml"
-        - "application/json"
+      summary: create a pokemon object in database
+      operationId: createPokemon
       parameters:
-        - in: "body"
-          name: "body"
-          description: "Pokemon object that needs to be added to the Pokedex"
-          required: true
+        - in: header
+          name: apiKey
+          description: the unique api key for this server
           schema:
-            $ref: "#/definitions/Pokemon"
-      responses:
-        "405":
-          description: "Invalid input"
-      security:
-        - pokedex_auth:
-            - "write:pokemons"
-            - "read:pokemons"
-    put:
-      tags:
-        - "pokemon"
-      summary: "Update an existing pokemon"
-      description: ""
-      operationId: "updatePokemon"
-      consumes:
-        - "application/json"
-        - "application/xml"
-      produces:
-        - "application/xml"
-        - "application/json"
-      parameters:
-        - in: "body"
-          name: "body"
-          description: "Pokemon object that needs to be added to the Pokedex"
+            type: string
           required: true
-          schema:
-            $ref: "#/definitions/Pokemon"
+      requestBody:
+        description: create pokemon request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePokemonRequest'
+        required: true
       responses:
-        "400":
-          description: "Invalid ID supplied"
-        "404":
-          description: "Pokemon not found"
-        "405":
-          description: "Validation exception"
-      security:
-        - pokedex_auth:
-            - "write:pokemons"
-            - "read:pokemons"
-  /pokemon/findByType:
-    get:
-      tags:
-        - "pokemon"
-      summary: "Finds pokemons by type"
-      description: "Multiple status values can be provided with comma separated strings"
-      operationId: "findPokemonByType"
-      produces:
-        - "application/xml"
-        - "application/json"
-      parameters:
-        - name: "status"
-          in: "query"
-          description: "Status values that need to be considered for filter"
-          required: true
-          type: "array"
-          items:
-            type: "string"
-            enum:
-              - "available"
-              - "pending"
-              - "sold"
-            default: "available"
-          collectionFormat: "multi"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Pokemon"
-        "400":
-          description: "Invalid status value"
-      security:
-        - pokedex_auth:
-            - "write:pokemons"
-            - "read:pokemons"
-  /pokemon/{pokemonId}:
-    get:
-      tags:
-        - "pokemon"
-      summary: "Find pokemon by ID"
-      description: "Returns a single pokemon"
-      operationId: "getPokemonById"
-      produces:
-        - "application/xml"
-        - "application/json"
-      parameters:
-        - name: "pokemonId"
-          in: "path"
-          description: "ID of pokemon to return"
-          required: true
-          type: "integer"
-          format: "int64"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/Pokemon"
-        "400":
-          description: "Invalid ID supplied"
-        "404":
-          description: "Pokemon not found"
-      security:
-        - api_key: []
-    post:
-      tags:
-        - "pokemon"
-      summary: "Updates a pokemon in the pokedex with form data"
-      description: ""
-      operationId: "updatePetWithForm"
-      consumes:
-        - "application/x-www-form-urlencoded"
-      produces:
-        - "application/xml"
-        - "application/json"
-      parameters:
-        - name: "pokemonId"
-          in: "path"
-          description: "ID of pokemon that needs to be updated"
-          required: true
-          type: "integer"
-          format: "int64"
-        - name: "name"
-          in: "formData"
-          description: "Updated name of the pokemon"
-          required: false
-          type: "string"
-        - name: "status"
-          in: "formData"
-          description: "Updated status of the pokemon"
-          required: false
-          type: "string"
-      responses:
-        "405":
-          description: "Invalid input"
-      security:
-        - pokedex_auth:
-            - "write:pokemons"
-            - "read:pokemons"
-    delete:
-      tags:
-        - "pokemon"
-      summary: "Deletes a pet"
-      description: ""
-      operationId: "deletePokemon"
-      produces:
-        - "application/xml"
-        - "application/json"
-      parameters:
-        - name: "api_key"
-          in: "header"
-          required: false
-          type: "string"
-        - name: "pokemonId"
-          in: "path"
-          description: "Pokemon id to delete"
-          required: true
-          type: "integer"
-          format: "int64"
-      responses:
-        "400":
-          description: "Invalid ID supplied"
-        "404":
-          description: "Pokemon not found"
-      security:
-        - pokedex_auth:
-            - "write:pokemons"
-            - "read:pokemons"
-  /pokemon/{pokemonId}/uploadImage:
-    post:
-      tags:
-        - "pokemon"
-      summary: "uploads an image"
-      description: ""
-      operationId: "uploadFile"
-      consumes:
-        - "multipart/form-data"
-      produces:
-        - "application/json"
-      parameters:
-        - name: "pokemonId"
-          in: "path"
-          description: "ID of pokemon to update"
-          required: true
-          type: "integer"
-          format: "int64"
-        - name: "additionalMetadata"
-          in: "formData"
-          description: "Additional data to pass to server"
-          required: false
-          type: "string"
-        - name: "file"
-          in: "formData"
-          description: "file to upload"
-          required: false
-          type: "file"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/ApiResponse"
-      security:
-        - pokedex_auth:
-            - "write:pokemons"
-            - "read:pokemons"
-securityDefinitions:
-  pokedex_auth:
-    type: "oauth2"
-    authorizationUrl: "http://pokemon.swagger.io/oauth/dialog"
-    flow: "implicit"
-    scopes:
-      write:pokemons: "modify pokemons in your account"
-      read:pokemons: "read your pokemons"
-  api_key:
-    type: "apiKey"
-    name: "api_key"
-    in: "header"
-definitions:
-  Category:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-    xml:
-      name: "Category"
-  Tag:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-    xml:
-      name: "Tag"
-  Pokemon:
-    type: "object"
-    required:
-      - "name"
-      - "photoUrls"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      category:
-        $ref: "#/definitions/Category"
-      name:
-        type: "string"
-        example: "doggie"
-      photoUrls:
-        type: "array"
-        xml:
-          name: "photoUrl"
-          wrapped: true
-        items:
-          type: "string"
-      tags:
-        type: "array"
-        xml:
-          name: "tag"
-          wrapped: true
-        items:
-          $ref: "#/definitions/Tag"
-      status:
-        type: "string"
-        description: "pokemon status in the store"
-        enum:
-          - "available"
-          - "pending"
-          - "sold"
-    xml:
-      name: "Pokemon"
-  ApiResponse:
-    type: "object"
-    properties:
-      code:
-        type: "integer"
-        format: "int32"
-      type:
-        type: "string"
-      message:
-        type: "string"
-externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+        200:
+          description: success response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePokemonResponse'
+        400:
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorInfo'
+components:
+  schemas:
+    CreatePokemonRequest:
+      type: object
+      required:
+        -
+                

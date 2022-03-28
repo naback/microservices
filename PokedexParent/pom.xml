@@ -23,12 +23,19 @@
         <maven.compiler.target>15</maven.compiler.target>
         <springfox-swagger2.version>3.0.0</springfox-swagger2.version>
         <com.h2database.version>2.1.210</com.h2database.version>
+        <openapi.generator.plugin.version>5.4.0</openapi.generator.plugin.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
+            <version>${springfox-swagger2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
             <version>${springfox-swagger2.version}</version>
         </dependency>
 
