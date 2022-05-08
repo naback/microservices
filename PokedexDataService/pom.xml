@@ -33,6 +33,12 @@
 			<version>${com.h2database.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${javax.validation.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
