@@ -26,6 +26,7 @@
         <openapi.generator.plugin.version>5.0.1</openapi.generator.plugin.version>
         <org.openapitools.version>0.2.1</org.openapitools.version>
         <javax.validation.version>2.0.1.Final</javax.validation.version>
+        <com.h2database>2.1.212</com.h2database>
     </properties>
 
     <dependencies>

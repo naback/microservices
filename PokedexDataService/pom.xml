@@ -39,6 +39,14 @@
 			<artifactId>validation-api</artifactId>
 			<version>${javax.validation.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${com.h2database}</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>

@@ -14,6 +14,4 @@ public class PokemonController implements PokemonApi
     {
         return PokemonApi.super.getPokemon(apiKey, createPokemonRequest);
     }
-
-
 }
