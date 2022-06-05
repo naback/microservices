@@ -16,8 +16,10 @@ tags:
       description: "Find out more"
       url: "http://swagger.io"
 paths:
-  /ping:
+  /dataservice/ping:
     get:
+      tags:
+        - Ping
       summary: pings the service to check its health
       operationId: ping
       responses:
@@ -30,10 +32,10 @@ paths:
                 example: i'm alive
         404:
           description: service unavailable
-  /pokemon:
+  /dataservice/v1/pokemon:
     post:
       tags:
-        - "pokemon"
+        - pokemon
       summary: create a pokemon object in database
       operationId: getPokemon
       parameters:

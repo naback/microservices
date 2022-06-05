@@ -63,6 +63,7 @@
 							<apiPackage>org.pokedex.dataservice.openapi</apiPackage>
 							<ignoreFileOverride>src/main/openapi/.openapi-generator-ignore</ignoreFileOverride>
 							<configOptions>
+								<useTags>true</useTags>
 								<artifactId>PokedexDataService</artifactId>
 								<groupId>org.pokedex.dataservice</groupId>
 								<basePackage>org.pokedex.dataservice.openapi</basePackage>
